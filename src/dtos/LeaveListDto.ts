@@ -1,0 +1,19 @@
+export interface LeaveListDto{
+    id:string
+    trans_no:string
+    leave_type:string
+    start_date:string
+    start_section:string
+    end_date:string
+    end_section:string
+    total_days:string
+    leave_reason:string
+    status:string
+    emp_name:string
+    emp_code:string
+    dsg_title:string
+    auth_notes:string
+    auth_by:string
+    proof_file:string
+    status_label:string
+}
