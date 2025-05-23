@@ -12,6 +12,8 @@ export const  ImageSlider:React.FC<ImageSliderProps> = ({
     images
 }:ImageSliderProps) => {
     const width = Dimensions.get('window').width;
+
+  console.log(images);
     return(
         <Box>
             <Carousel

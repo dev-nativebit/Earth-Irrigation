@@ -57,7 +57,7 @@ export const CalendarModel: React.FC<CalendarModelProps> = ({
 					backgroundColor={'white'}
 				>
 					<Box
-						backgroundColor={'grayGrey'}
+						backgroundColor={'gray'}
 						height={'1.5%'}
 						width={'10%'}
 						marginTop={'s'}

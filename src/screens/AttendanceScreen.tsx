@@ -2,35 +2,37 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {
   AttendanceBottomSheet,
   Box,
-  Button, hideFullScreenProgress, Image, Pressable,
+  Button,
+  hideFullScreenProgress,
+  Pressable,
   Screen,
   ScreenHeader,
   showFullScreenProgress,
-  StatusBarType, Text,
+  StatusBarType,
+  Text,
 } from '@/component';
 import {SvgIcon} from '@/assets/SvgIcon';
 import {Asset, launchCamera} from 'react-native-image-picker';
 import {AttendanceApiParams, GetAttendanceListApiParams} from '@/api';
 import {actions, RootState, useAppSelector} from '@/redux/root.store';
 import {goBack} from '@/navigation/AppNavigation';
-import {AttendanceList, EmployeeDetailModel, MenuModel, MenuPositionModel} from '@/model';
-import {EmployeeDetailDto, MenuDto, MenuPositionDto} from '@/dtos';
-import {showErrorMessage} from "@/core";
-import Geolocation from "@react-native-community/geolocation";
-import {utils} from "@/utils/Utils";
-import {DeviceHelper} from "@/helper";
-import {FlatList} from "react-native";
-import {fonts, Theme} from "@/style";
-import moment from "moment";
-import {useTheme} from "@shopify/restyle";
-import FastImage from "react-native-fast-image";
+import {AttendanceList, MenuModel, MenuPositionModel} from '@/model';
+import {MenuDto, MenuPositionDto} from '@/dtos';
+import {showErrorMessage} from '@/core';
+import Geolocation from '@react-native-community/geolocation';
+import {utils} from '@/utils/Utils';
+import {DeviceHelper} from '@/helper';
+import {FlatList} from 'react-native';
+import {fonts, Theme} from '@/style';
+import moment from 'moment';
+import {useTheme} from '@shopify/restyle';
+import FastImage from 'react-native-fast-image';
 
 export const AttendanceScreen: React.FC = () => {
   const [isVisibleBottomSheet, setIsVisibleBottomSheet] = useState(false);
   const [fileName, setFileName] = useState('');
   const [afterImages, setAfterImages] = useState<Asset[]>([]);
   const userPermissionResult = useAppSelector((state:RootState) => state.userDetail.userPermissionResult);
-  const employeeDetailResult = useAppSelector((state:RootState) => state.userDetail.employeeDetail);
   const attendanceListResult = useAppSelector((state:RootState) => state.userDetail.attendanceList);
   const {colors} = useTheme<Theme>()
 
@@ -61,12 +63,6 @@ export const AttendanceScreen: React.FC = () => {
     return attendanceList.items.filter(item => item.punch_date.slice(0,10) === toDayData).length
   }, [attendanceList]);
 
-  const employeeDetail:EmployeeDetailModel = useMemo(() => {
-    if (employeeDetailResult?.isSuccess){
-      return employeeDetailResult.getValue().employeeDetail
-    }
-    return new EmployeeDetailModel({} as EmployeeDetailDto)
-  }, []);
 
   const handelOnCamaraPress = async () =>{
     const response = await launchCamera({
